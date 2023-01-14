@@ -1,8 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { db, createDatabase, insertUserDetails } from '../database/userTable';
-import bcrypt from 'bcryptjs';
-import { useDispatch } from 'react-redux';
-
+import { insertUserDetails, fetchAllUsers } from '../database/userTable';
+import bcrypt from 'bcrypt-react-native';
+//import { useDispatch } from 'react-redux';
 
 
 
@@ -35,23 +34,42 @@ const userSlice = createSlice({
 export const { createUserStart, createUserSuccess, createUserError } = userSlice.actions;
 
 // Thunk
-export const createUser = ( username, email, password ) =>  {
+export const createUser = async (username, email, password) =>  {
+  try {
+    // const saltRounds = 10;
+    // const salt = await bcrypt.genSalt(saltRounds);
+    // const hashedPassword = await bcrypt.hash(plainPassword, salt, function (err, hash) {
+    //   if (err) {
+    //     return err;
+    //   }
 
-  try{ const dispatch = useDispatch();
-    console.log(email, password, username)
-  }catch(e){
-    console.log("Error here", e)
+    //   return hash
+    // });
+    // console.log(`Hashed password: ${hashedPassword}`);
+    
+    // const salt = await bcrypt.getSalt(10);
+    // const hash = await bcrypt.hash(salt, password);
+    // insertUserDetails(username, email, hash)
+
+
+    insertUserDetails(username, email, password)
+
+    fetchAllUsers()
+
+   } catch (e) { 
+    console.log(e)
   }
-   
-    //insertUserDetails(username, email, password)
+
+  
+  
   // try {
   //   dispatch(createUserStart());
   //   const hashedPassword = await bcrypt.hash(password, 10);
-    
+
   //   // Insert the user into the database
   //   db.transaction(tx => {
   //     tx.executeSql(
-  //       `INSERT INTO users (email, password, username) VALUES (?, ?, ?)`,
+  //       `INSERT INTO users (username, email, password) VALUES (?, ?, ?)`,
   //       [email, hashedPassword, username],
   //       (_, result) => {
   //         console.log(`User created with id: ${result.insertId}`);
@@ -68,6 +86,10 @@ export const createUser = ( username, email, password ) =>  {
   //   dispatch(createUserError(err.message));
   // }
 };
+
+
+
+
 
 // Reducer
 export default userSlice.reducer;

@@ -30,12 +30,16 @@ const LoginPage = ({navigation}) => {
     setUserExist(null)
     try {
       // check if the user exists
-      const user = await checkUserExists(email)
+      
       if (!email || !password) {
         setHelperText("Email and Password are required");
           setUserExist(false)
           return
       }
+
+      //const user = await checkUserExists(email)
+      
+
       setUserExist(true)
       
       dispatch(login(email, password));
@@ -43,8 +47,6 @@ const LoginPage = ({navigation}) => {
       console.log(error)
     }
   }
-
- 
 
 
   return (

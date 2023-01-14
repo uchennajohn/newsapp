@@ -20,14 +20,14 @@ import * as SQLite from 'expo-sqlite';
 // export { db, createUsersTable };
 
 
-
-const db = SQLite.openDatabase('newsapp.db');
+//create DB
+const db = SQLite.openDatabase('app.db');
 const createDatabase = () => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
         `CREATE TABLE IF NOT EXISTS users (
-             id integer NOT NULL,
+              id integer PRIMARY KEY,
               username TEXT NOT NULL,
               email TEXT NOT NULL,
               password TEXT NOT NULL
@@ -45,6 +45,9 @@ const createDatabase = () => {
     });
   });
 };
+
+
+//add users
 const insertUserDetails = (username, email, password) => {
   try{
     return new Promise((resolve, reject) => {
@@ -56,13 +59,16 @@ const insertUserDetails = (username, email, password) => {
           (_, error)=> reject(error)
         );
       });
+      console.log("Added Successfully")
     });
   }catch(e){
       console.log("Erorr inserting User", e )
   }
   
 };
-const fetchUser = () => {
+
+//fetch ALL user
+const fetchAllUsers = () => {
   return new Promise((resolve, reject) => {
     db.transaction((tx) => {
       tx.executeSql(
@@ -82,4 +88,6 @@ const fetchUser = () => {
 };
 
 
-export { db, createDatabase, fetchUser, insertUserDetails };
+
+
+export { db, createDatabase, insertUserDetails, fetchAllUsers };

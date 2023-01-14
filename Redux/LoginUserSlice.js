@@ -46,7 +46,14 @@ export const login = (email, password) => async dispatch => {
               throw new Error("Email doesn't exist");
             }
             // Compare the entered password with the hashed password stored in the database
-            const match = bcrypt.compareSync(password, _array[0].password);
+           // const match = bcrypt.compareSync(password, _array[0].password);
+//            const match = password === _array[0].password
+
+            if (password === _array[0].password) {
+              match = true
+            } else {
+              match = false            
+            }
             if (!match) {
               throw new Error("Invalid password");
             }
