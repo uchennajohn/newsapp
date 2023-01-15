@@ -9,14 +9,14 @@ import {
   ImageBackground,
 } from "react-native";
 import { HelperText } from "react-native-paper";
-//import { useNavigation } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch } from "react-redux";
 import { createDatabase, createUsersTable } from "../../database/userTable";
 import { createUser } from "../../Redux/CreateUserSlice";
 
 const RegisterPage = () => {
-  //const navigation = useNavigation();
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -40,7 +40,7 @@ const RegisterPage = () => {
       setHelperText("");
       try{
       const res = await createUser(name, email, password);
-      //dispatch(createUser(name, email, password))
+      dispatch(createUser(name, email, password))
       //console.log(res);
       }catch(e){
           console.log("Error creating User", e)
@@ -157,7 +157,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   signInText: {
-    color: "#9ea9b3",
+    color: "black",
     fontSize: 15,
     letterSpacing: 0.5,
     fontWeight: "bold",
@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   buttonText: {
-    color: "#4f83cc",
+    color: "black",
     fontWeight: "bold",
     textAlign: "center",
   },

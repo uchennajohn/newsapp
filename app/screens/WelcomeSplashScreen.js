@@ -7,7 +7,7 @@ function SplashScreen({navigation}) {
    
     React.useEffect(() => {
         setTimeout(() => {
-          navigation.navigate("RegisterScreen")
+          navigation.navigate("Register")
         }, 5000);
       });
     
@@ -22,7 +22,7 @@ function SplashScreen({navigation}) {
     <View style={styles.logoContainer}>
         <Image style={styles.logo} source={require("../assets/quick.png")} />
         <Text style={styles.tagline}></Text>
-        <Text style={styles.label}>designed By Uchenna John</Text>
+        <Text style={styles.label}>Designed By Okechukwu Uchenna John</Text>
       </View>
 
    </ImageBackground>

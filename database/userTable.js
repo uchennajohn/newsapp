@@ -79,7 +79,7 @@ const fetchAllUsers = () => {
           for (let i = 0; i < result.rows.length; ++i)
             temp.push(JSON.stringify(result.rows.item(i)));
           console.log("Result=>" + temp);
-          console.log("Feched EVeerything" + result);
+          console.log("Feched Everything" + result);
         },
         (_, error) => reject(error)
       );

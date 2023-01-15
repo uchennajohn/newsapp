@@ -92,7 +92,7 @@ const NewsScreen = () => {
                 </View>
 
                 <TouchableOpacity style={styles.card} onPress={()=> Linking.openURL(`${item.url}`)}>
-                <Text style={styles.url}>READ NEWS</Text>
+                <Text style={styles.url}>READ ARTICLE</Text>
                 </TouchableOpacity>
                 <View style={styles.card}>
                 <Text style={styles.score}>Reader's score: {item.score}</Text>

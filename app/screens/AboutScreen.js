@@ -1,125 +1,3 @@
-// import React, { useState } from 'react';
-// import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking } from 'react-native';
-// import { Avatar, Title, Paragraph } from 'react-native-paper';
-// import {Picker} from "@react-native-picker/picker"
-
-// const ProfileScreen = () => {
-//     const [selectedValue, setSelectedValue] = useState("item1")
-//   return (
-//     <View style={styles.container}>
-//     <View style={styles.menu}>
-//       <Picker
-//         selectedValue={selectedValue}
-//         style={{ height: 50, width: 100 }}
-//         onValueChange={(itemValue, itemIndex) => setSelectedValue(itemValue)}
-//       >
-//         <Picker.Item label="GitHub" value="GitHub" />
-//         <Picker.Item label="Twitter" value="item2" />
-//         <Picker.Item label="LinkedIn" value="item3" />
-//       </Picker>
-//       <Text>Selected: {selectedValue}</Text>
-//     </View>
-//      <View style={styles.header}>
-//         <Avatar.Image 
-//           size={150}
-//           source={{ uri: 'https://picsum.photos/200' }}
-//         />
-//         <Title style={styles.name}> Okechukwu Uchenna </Title>
-//         <Title style={styles.title}>Software Engineer</Title>
-//       </View>
-//       <View style={styles.body}>
-//         <Paragraph style={styles.info}>Email: okechukwuchenna@gmail.com</Paragraph>
-//         <Paragraph style={styles.info}>Phone: +2349014214236</Paragraph>
-//         <Paragraph style={styles.info}>Lagos, Nigeria</Paragraph>
-//       </View>
-
-//       <ScrollView style={styles.scrol}>
-//         <View style={styles.skills}>
-//             <Text>REACT NATIVE</Text>
-//             <Text>NODE.JS</Text>
-//             <Text>MySQL</Text>
-//             <Text>AGIILE METHODOLOGY</Text>
-//             <Text>MONGO DB</Text>
-//         </View>
-//       </ScrollView>
-
-//       <TouchableOpacity style={styles.button} onPress={()=> Linking.openURL('https://github.com/uchennajohn')}>
-//             <Text style={styles.link}>GITHUB</Text>
-//       </TouchableOpacity>
-//     </View>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//     container: {
-//         flex: 1,
-//         backgroundColor: '#fff',
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//     },
-//       header: {
-        
-//         padding: 20,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         marginTop: 80,
-//       },
-//       menu:{
-//         marginTop: 20
-//       },
-//       name: {
-//         marginTop: 10,
-//         color: "#000"
-//       },
-//       body: {
-//         flex: 1,
-//         alignItems: 'center',
-//         padding: 30,
-//       },
-//       info: {
-//         marginVertical: 4,
-//         fontSize: 16,
-//         color: "black"
-//       },
-//       skills:{
-//         flex: 1,
-//         alignItems: 'center',
-//         justifyContent: 'center',
-//         backgroundColor:"green",
-//         width:"100%"
-//      },
-//      scrol:{
-//         width:"70%",
-//         borderRadius: 25
-        
-//      },
-     
-//       link:{
-//         color:"#9ea9b3"
-//       },
-//       button:{
-//         backgroundColor: "#182952",
-//         height: 40,
-//         flexDirection: "row",
-//         justifyContent: "center",
-//         alignItems:"center",
-//         borderRadius:9,
-//         width: 60
-//       },
-//       title:{
-//     color:"#9ea9b3",
-//     fontSize: 15,
-//     letterSpacing:0.5,
-//     fontWeight:"bold"
-//       }
-     
-// })
-
-
-
-// export default ProfileScreen;
-
-
 import { View, Text, SafeAreaView, StyleSheet, ScrollView,Modal, Image, TouchableOpacity, Linking, ImageBackground } from 'react-native'
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 import React,{useState} from 'react';
@@ -129,6 +7,16 @@ import { Paragraph } from 'react-native-paper';
 const AboutScreen = () => {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [bgColor, setBgColor] = useState('white');
+
+    //handles circle color chnage
+    const randomRgb = () => {
+        const red = Math.floor(Math.random() * 256);
+        const green = Math.floor(Math.random() * 256);
+        const blue = Math.floor(Math.random() * 256);
+        return `rgb(${red}, ${green}, ${blue})`;
+      }
+    
 
   return (
     <ImageBackground
@@ -137,8 +25,9 @@ const AboutScreen = () => {
     >
     <SafeAreaView style={StyleSheet.container}>
 
+    {/* this modal controls the social media menu */}
     <TouchableOpacity
-        style={{ marginTop: 16, backgroundColor: "black", width: "30%", shadowColor: '#000',
+        style={{ marginTop: 16, backgroundColor: "white", width: "30%", shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
         shadowRadius: 10,
@@ -147,7 +36,7 @@ const AboutScreen = () => {
     }}
         onPress={() => setModalVisible(true)}
       >
-        <Text style={{ color: 'white',paddingLeft:19,paddingBottom: 5, fontSize: 24 }}>Socials</Text>
+        <Text style={{ color: 'black',paddingLeft:19,paddingBottom: 5, fontSize: 24 }}>Socials</Text>
       </TouchableOpacity>
 
       <Modal visible={modalVisible}  animationType='slide'>
@@ -183,8 +72,10 @@ const AboutScreen = () => {
                 </View>
                 </TouchableOpacity>
                 <View style={styles.active}></View>
-                <TouchableOpacity >
-                <View style={styles.add}>
+                <TouchableOpacity style={[styles.add, { backgroundColor: bgColor}]}
+                onPress={() => setBgColor(randomRgb())}
+                >
+                <View>
                     <Ionicons name='add-circle' color="#dfd8c8" style={{marginTop: 6, marginLeft: 2}}></Ionicons>
                 </View>
                 </TouchableOpacity>
@@ -198,7 +89,11 @@ const AboutScreen = () => {
              </View>
              <View>
                 <Paragraph style={{margin: 10}}>
-                
+                A proactive and pragmatic individual with a good understanding 
+                of team collaboration to optimize productivity. I also have excellent
+                communication skills that help me to be able to share my ideas and solutions 
+                and help me thrive as a team player in any organization.
+                Some of the the technologies I use are
                 </Paragraph>
              </View>
 
@@ -268,7 +163,7 @@ const styles = StyleSheet.create({
         borderRadius: 10
     },
     add:{
-        backgroundColor: "#41444B",
+        
         position:"absolute",
         bottom: 0,
         right: 0,

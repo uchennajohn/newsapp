@@ -15,20 +15,75 @@ import AboutScreen from "../app/screens/AboutScreen";
 import NewsScreen from "../app/screens/NewsScreen";
 
 const Stack = createStackNavigator();
-const Tab = createBottomTabNavigator()
-const TabNavigator =()=>(
-  <Tab.Navigator screenOptions={{
-    tabBarActiveBackgroundColor: "orange",
-    tabBarActiveTintColor: "white",
-    
-  }}>
-    <Tab.Screen name="SplashScreen" options={{title:"WELCOME" ,tabBarIcon: ({size, color})=> <MaterialCommunityIcons name="home" size={size} color={color}/>}}   component={SplashScreen}/>
-    <Tab.Screen  name="RegisterScreen" component={Register} options={{title:"REGISTER",tabBarIcon: ({size, color})=> <MaterialCommunityIcons name="account-plus" size={size} color={color}/>}} />
-    <Tab.Screen  name="Login"  component={Login} options={{title:"LOGIN", tabBarIcon: ({size, color})=> <MaterialCommunityIcons name="login" size={size} color={color} />}}/>
-    <Tab.Screen  name="NewsScreen" component={NewsScreen} options={{title:"ARTICLE",tabBarIcon: ({size, color})=> <MaterialCommunityIcons name="newspaper" size={size}  color={color}/>}}/>
-    <Tab.Screen  name="About" tabBarActiveBackgroundColor="blue" options={{title:"ABOUT" ,tabBarIcon: ({size,color })=> <MaterialCommunityIcons name="information-outline" size={size} color={color}/>}}component={AboutScreen}/>
+const Tab = createBottomTabNavigator();
+const TabNavigator = () => (
+  <Tab.Navigator
+    screenOptions={{
+      tabBarActiveBackgroundColor: "orange",
+      tabBarActiveTintColor: "white",
+    }}
+  >
+    <Tab.Screen
+      name="SplashScreen"
+      options={{
+        title: "WELCOME",
+        tabBarIcon: ({ size, color }) => (
+          <MaterialCommunityIcons name="home" size={size} color={color} />
+        ),
+      }}
+      component={SplashScreen}
+    />
+    <Tab.Screen
+      name="Register"
+      component={Register}
+      options={{
+        title: "REGISTER",
+        tabBarIcon: ({ size, color }) => (
+          <MaterialCommunityIcons
+            name="account-plus"
+            size={size}
+            color={color}
+          />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="Login"
+      component={Login}
+      options={{
+        title: "LOGIN",
+        tabBarIcon: ({ size, color }) => (
+          <MaterialCommunityIcons name="login" size={size} color={color} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="NewsScreen"
+      component={NewsScreen}
+      options={{
+        title: "ARTICLE",
+        tabBarIcon: ({ size, color }) => (
+          <MaterialCommunityIcons name="newspaper" size={size} color={color} />
+        ),
+      }}
+    />
+    <Tab.Screen
+      name="About"
+      tabBarActiveBackgroundColor="blue"
+      options={{
+        title: "ABOUT",
+        tabBarIcon: ({ size, color }) => (
+          <MaterialCommunityIcons
+            name="information-outline"
+            size={size}
+            color={color}
+          />
+        ),
+      }}
+      component={AboutScreen}
+    />
   </Tab.Navigator>
-)
+);
 
 const MyStack = () => {
   return (

@@ -52,7 +52,7 @@ export const createUser = async (username, email, password) =>  {
     // insertUserDetails(username, email, hash)
 
 
-    insertUserDetails(username, email, password)
+    insertUserDetails("single user data",username, email, password)
 
     fetchAllUsers()
 

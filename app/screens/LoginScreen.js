@@ -12,10 +12,10 @@ import { HelperText } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../Redux/LoginUserSlice";
+import { login , loginSuccess} from "../../Redux/LoginUserSlice";
 
-const LoginPage = ({navigation}) => {
-  //const navigation = useNavigation();
+const LoginPage = () => {
+  const navigation = useNavigation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -27,25 +27,20 @@ const LoginPage = ({navigation}) => {
 
   //function to handle submit
   const handleSubmit = async (email, password) => {
-    setUserExist(null)
-    try {
-      // check if the user exists
-      
-      if (!email || !password) {
+    //setUserExist(null)
+    if (!email || !password) {
         setHelperText("Email and Password are required");
-          setUserExist(false)
-          return
-      }
-
-      //const user = await checkUserExists(email)
-      
-
-      setUserExist(true)
-      
-      dispatch(login(email, password));
-    } catch (error) {
-      console.log(error)
-    }
+        setUserExist(false)
+       }else{
+        console.log(`Email: ${email}, Password: ${password}`)
+        setHelperText("");
+        try {
+          const res = await login(email, password)
+          dispatch(loginSuccess(email, password))
+        } catch (error) {
+          console.log("Error Login In")
+        }
+       }    
   }
 
 
@@ -56,11 +51,7 @@ const LoginPage = ({navigation}) => {
     >
     
     <View style={styles.container}>
-      
-      { isLoading && <Text>Loading...</Text> }
-      { error && <Text>{error}</Text> }
-      { userExist === false && <Text> Email does not exist </Text> }
-      { user && <Text>Welcome, {user.name}</Text> }
+       
       <View style={styles.headerContainer}>
         <Text style={styles.welcomeText}>Welcome</Text>
         <Text style={styles.signInText}>
@@ -113,7 +104,7 @@ const LoginPage = ({navigation}) => {
 
 
       <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-        <Text style={styles.buttonText}>Login</Text>
+        <Text style={styles.buttonText}>LOGIN</Text>
       </TouchableOpacity>
 
       <View style={styles.footerContainer}>
