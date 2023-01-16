@@ -32,9 +32,9 @@ export const { loginStart, loginSuccess, loginError } = loginSlice.actions;
 
 
 // Thunk
-export const login = (email, password) => async dispatch => {
+export const login = async (email, password) => {
     try {
-      dispatch(loginStart());
+      //dispatch(loginStart());
       // Retrieve the user from the database
       db.transaction(tx => {
         tx.executeSql(
@@ -48,7 +48,7 @@ export const login = (email, password) => async dispatch => {
             // Compare the entered password with the hashed password stored in the database
            // const match = bcrypt.compareSync(password, _array[0].password);
 //            const match = password === _array[0].password
-
+            console.log("array found", _array)
             if (password === _array[0].password) {
               match = true
             } else {
@@ -58,7 +58,8 @@ export const login = (email, password) => async dispatch => {
               throw new Error("Invalid password");
             }
             // login success
-            dispatch(loginSuccess(_array[0]));
+            //dispatch(loginSuccess(_array[0]));
+            return "success"
           },
           (_, error) => {
             console.log(`Error logging in: ${error}`);
@@ -68,7 +69,7 @@ export const login = (email, password) => async dispatch => {
       });
     } catch (err) {
       console.log(err);
-      dispatch(loginError(err.message));
+     // dispatch(loginError(err.message));
     }
   };
   

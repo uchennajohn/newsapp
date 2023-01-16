@@ -52,10 +52,10 @@ export const createUser = async (username, email, password) =>  {
     // insertUserDetails(username, email, hash)
 
 
-    insertUserDetails("single user data",username, email, password)
-
+    insertUserDetails(username, email, password)
     fetchAllUsers()
 
+    return "Created Successfully"
    } catch (e) { 
     console.log(e)
   }

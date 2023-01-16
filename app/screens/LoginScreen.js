@@ -20,23 +20,39 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [helperText, setHelperText] = useState("");
+  const [error, setError] = useState(false);
   const dispatch = useDispatch();
   const [userExist, setUserExist] =useState(null)
-  const {isLoading, error, user} = useSelector(state => state.login)
+//  const {isLoading, error, user} = useSelector(state => state.login)
 
 
   //function to handle submit
   const handleSubmit = async (email, password) => {
     //setUserExist(null)
     if (!email || !password) {
+        setError(true);
         setHelperText("Email and Password are required");
+      console.log("Email and Password are required");
         setUserExist(false)
        }else{
-        console.log(`Email: ${email}, Password: ${password}`)
+      console.log(`Email: ${email}, Password: ${password}`)
+        setError(true);
         setHelperText("");
         try {
-          const res = await login(email, password)
-          dispatch(loginSuccess(email, password))
+         await login(email, password).then(res => { 
+            console.log("response is",res)
+           if (res === "success") {
+              setError(true);
+              setHelperText("Logged in Successfully");
+              console.log("Logged in Successfully")
+           } else {
+              setError(true);
+              setHelperText("Incorrect Username or Password");
+              console.log("Incorrect Username or Password")
+            }
+          })
+
+          //dispatch(loginSuccess(email, password))
         } catch (error) {
           console.log("Error Login In")
         }
@@ -103,7 +119,7 @@ const LoginPage = () => {
       </HelperText>
 
 
-      <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+      <TouchableOpacity style={styles.button} onPress={()=> handleSubmit(email,password)}>
         <Text style={styles.buttonText}>LOGIN</Text>
       </TouchableOpacity>
 

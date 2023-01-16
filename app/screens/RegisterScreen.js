@@ -39,9 +39,11 @@ const RegisterPage = () => {
       setError(true);
       setHelperText("");
       try{
-      const res = await createUser(name, email, password);
-      dispatch(createUser(name, email, password))
-      //console.log(res);
+        const res = await createUser(name, email, password);
+        setError(true);
+        setHelperText(res);
+      //dispatch(createUser(name, email, password))
+      console.log(res);
       }catch(e){
           console.log("Error creating User", e)
       }
