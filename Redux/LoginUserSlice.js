@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { db } from '../database/userTable';
-//import bcrypt from 'bcryptjs';
+
 
 // Initial State
 const initialState = {

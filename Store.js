@@ -1,4 +1,4 @@
-import { createStore, combineReducers } from 'redux';
+import { legacy_createStore as createStore, combineReducers } from 'redux';
 import loginReducer from './Redux/LoginUserSlice';
 import userReducer from "./Redux/CreateUserSlice"
 

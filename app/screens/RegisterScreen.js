@@ -8,6 +8,8 @@ import {
   Dimensions,
   ImageBackground,
 } from "react-native";
+
+//imported libraries and Models
 import { HelperText } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from "@expo/vector-icons";
@@ -42,7 +44,16 @@ const RegisterPage = () => {
         const res = await createUser(name, email, password);
         setError(true);
         setHelperText(res);
-      //dispatch(createUser(name, email, password))
+         
+      // setTime to chnage the state of input on succesful reg and to navigate to the login page
+      setTimeout(() => {
+        setEmail("");
+        setPassword("");
+        setName("");
+        navigation.navigate('Login', { message: 'Registration Successful! Please Login' });
+      }, 3000);
+
+      
       console.log(res);
       }catch(e){
           console.log("Error creating User", e)

@@ -178,7 +178,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   buttonText: {
-    color: "#4f83cc",
+    color: "black",
     fontWeight: "bold",
     textAlign: "center",
   },
