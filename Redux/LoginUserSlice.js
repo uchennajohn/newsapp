@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { db } from '../database/userTable';
-import bcrypt from 'bcryptjs';
+//import bcrypt from 'bcryptjs';
 
 // Initial State
 const initialState = {
@@ -32,46 +32,51 @@ export const { loginStart, loginSuccess, loginError } = loginSlice.actions;
 
 
 // Thunk
-export const login = async (email, password) => {
-    try {
-      //dispatch(loginStart());
-      // Retrieve the user from the database
+export const login = (email, password) => {
+  try {
+    //dispatch(loginStart());
+    // Retrieve the user from the database
+    var match = false
+    return new Promise((resolve, reject) => {
       db.transaction(tx => {
+        console.log("shows now")
         tx.executeSql(
           'SELECT * FROM users WHERE email = ?',
           [email],
           (_, { rows: { _array } }) => {
             // check if the email exists
             if (_array.length === 0) {
-              throw new Error("Email doesn't exist");
+              reject("Email doesn't exist");
             }
             // Compare the entered password with the hashed password stored in the database
-           // const match = bcrypt.compareSync(password, _array[0].password);
-//            const match = password === _array[0].password
+            // const match = bcrypt.compareSync(password, _array[0].password);
+            //            const match = password === _array[0].password
+           
             console.log("array found", _array)
             if (password === _array[0].password) {
               match = true
             } else {
-              match = false            
+              match = false
             }
-            if (!match) {
-              throw new Error("Invalid password");
-            }
-            // login success
-            //dispatch(loginSuccess(_array[0]));
-            return "success"
+            console.log(match)
+            
+            match ? resolve("Login Successful") : reject("Invalid login credentials")
           },
           (_, error) => {
             console.log(`Error logging in: ${error}`);
-            throw new Error(error);
+            reject(new Error(error))
           }
+          
         );
       });
+    });
+   
     } catch (err) {
       console.log(err);
-     // dispatch(loginError(err.message));
     }
-  };
+
+  
+};
   
   // Reducer
   export default loginSlice.reducer;

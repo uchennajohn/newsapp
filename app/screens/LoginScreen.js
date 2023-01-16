@@ -23,7 +23,6 @@ const LoginPage = () => {
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
   const [userExist, setUserExist] =useState(null)
-//  const {isLoading, error, user} = useSelector(state => state.login)
 
 
   //function to handle submit
@@ -41,18 +40,16 @@ const LoginPage = () => {
         try {
          await login(email, password).then(res => { 
             console.log("response is",res)
-           if (res === "success") {
               setError(true);
-              setHelperText("Logged in Successfully");
-              console.log("Logged in Successfully")
-           } else {
-              setError(true);
-              setHelperText("Incorrect Username or Password");
-              console.log("Incorrect Username or Password")
-            }
-          })
+              setHelperText(res);
+              console.log(res)
+           
+         }, err => {
+           setError(true);
+           setHelperText(err);
+           console.log("Invalid Login", err)
+         })
 
-          //dispatch(loginSuccess(email, password))
         } catch (error) {
           console.log("Error Login In")
         }
