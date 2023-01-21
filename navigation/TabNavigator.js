@@ -14,7 +14,7 @@ import SplashScreen from "../app/screens/WelcomeSplashScreen";
 import AboutScreen from "../app/screens/AboutScreen";
 import NewsScreen from "../app/screens/NewsScreen";
 
-const Stack = createStackNavigator();
+
 const Tab = createBottomTabNavigator();
 const TabNavigator = () => (
   <Tab.Navigator
